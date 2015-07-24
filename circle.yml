@@ -1,5 +1,7 @@
 ## Customize the test machine
 machine:
+  node:
+    version: 0.12.7
 
   timezone:
-    America/Chicago # Set the timezone
+    UTC # Set the timezone
