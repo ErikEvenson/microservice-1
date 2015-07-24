@@ -10,6 +10,5 @@
   "author": "Erik E. Evenson",
   "license": "ISC",
   "dependencies": {
-    "nodemon": "1.3.8"
   }
 }

@@ -7,7 +7,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Load dependencies
-# source "$DIR/scripts/bash_utility_functions.sh"
+# source "$DIR/bin/bash_utility_functions.sh"
 
 # Set usage string
 USAGE=$(cat <<EOF
@@ -28,7 +28,7 @@ case $COMMAND in
     exit
     ;;
   delete_all)
-    ./scripts/manage.sh delete_all_containers && ./scripts/manage.sh delete_all_images
+    bin/manage.sh stop && bin/manage.sh delete_all_containers && bin/manage.sh delete_all_images
     exit
     ;;
   delete_all_containers)
@@ -40,14 +40,23 @@ case $COMMAND in
     exit
     ;;
   dev)
-    docker run -d -p 80:80 --volume=/vagrant/microservice-1/image:/usr/src/app eevenson/microservice-1:dev
+    nodemon -e js,sh --watch image -x "bin/manage.sh run" image/app.js
     exit
     ;;
   run)
+    docker kill tmp
+    docker rm tmp
+    docker build -t tmp image/.
+    docker run -d -p 80:80 --name="tmp" tmp
+    exit
+    ;;
+  stop)
+    docker stop tmp
     exit
     ;;
   test)
-    echo "BOO!"
+    echo $(pwd)
+    echo $DIR
     exit
     ;;
   # test)
