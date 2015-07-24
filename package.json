@@ -5,10 +5,19 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test"
   },
   "author": "Erik E. Evenson",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "3.2.0",
+    "gulp": "3.9.0",
+    "gulp-mocha": "2.1.3",
+    "gulp-shell": "0.4.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ErikEvenson/microservice-1"
   }
 }
