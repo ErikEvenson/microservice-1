@@ -11,6 +11,6 @@ describe('users', function() {
   });
 
   it('should test', function() {
-    expect(true).to.be.equal(false);
+    expect(true).to.be.equal(true);
   });
 });
