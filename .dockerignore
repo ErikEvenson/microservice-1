@@ -1,0 +1,5 @@
+# Do not load into docker context.
+.gitignore
+bin/
+docs/
+README.md
