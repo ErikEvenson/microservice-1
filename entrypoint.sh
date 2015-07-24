@@ -2,7 +2,7 @@
 set -e
 
 if [ "$1" = 'web' ]; then
-  /usr/bin/node /var/www/app.js
+  /usr/bin/node /opt/app/app.js
 fi
 
 exec "$@"

@@ -1,0 +1,14 @@
+{
+  "delay": "100ms",
+  "ext": ["js", "sh"],
+  "ignore": [
+    ".git",
+    "node_modules",
+    "bower_components",
+    ".sass-cache",
+    ".gitignore",
+    ".dockerfile",
+    "README.md"
+  ],
+  "verbose": true
+}

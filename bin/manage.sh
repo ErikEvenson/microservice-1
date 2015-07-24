@@ -23,8 +23,12 @@ shift
 # Set script parameters
 # Switch between various management commands
 case $COMMAND in
+  bash)
+    docker exec -it tmp /bin/bash
+    exit
+    ;;
   build)
-    docker build -t eevenson/microservice-1:dev image/.
+    docker build -t eevenson/microservice-1:dev .
     exit
     ;;
   delete_all)
@@ -40,13 +44,13 @@ case $COMMAND in
     exit
     ;;
   dev)
-    nodemon -e js,sh --watch image -x "bin/manage.sh run" image/app.js
+    nodemon -e js,sh -x "bin/manage.sh run" app.js
     exit
     ;;
   run)
     docker kill tmp
     docker rm tmp
-    docker build -t tmp image/.
+    docker build -t tmp .
     docker run -d -p 80:80 --name="tmp" tmp
     exit
     ;;
@@ -54,16 +58,6 @@ case $COMMAND in
     docker stop tmp
     exit
     ;;
-  test)
-    echo $(pwd)
-    echo $DIR
-    exit
-    ;;
-  # test)
-  #   source "$DIR/functions/test/test_environment.sh"
-  #   test_environment
-  #   exit
-  #   ;;
   * | $_NULL)
     echo -e "$USAGE"
     exit 1
