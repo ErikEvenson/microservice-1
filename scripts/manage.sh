@@ -24,7 +24,26 @@ shift
 # Switch between various management commands
 case $COMMAND in
   build)
-    docker build -t eevenson/microservice-1 image/.
+    docker build -t eevenson/microservice-1:dev image/.
+    exit
+    ;;
+  delete_all)
+    ./scripts/manage.sh delete_all_containers && ./scripts/manage.sh delete_all_images
+    exit
+    ;;
+  delete_all_containers)
+    docker rm `docker ps --no-trunc -aq`
+    exit
+    ;;
+  delete_all_images)
+    docker rmi $(docker images -q)
+    exit
+    ;;
+  dev)
+    docker run -d -p 80:80 --volume=/vagrant/microservice-1/image:/usr/src/app eevenson/microservice-1:dev
+    exit
+    ;;
+  run)
     exit
     ;;
   test)
