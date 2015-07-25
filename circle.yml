@@ -3,6 +3,9 @@ machine:
   node:
     version: 0.12.7
 
+  services:
+    - docker
+    
   timezone:
     UTC # Set the timezone
 
