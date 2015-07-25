@@ -2,4 +2,6 @@
 .gitignore
 bin/
 docs/
+gulp/
+node_modules/
 README.md

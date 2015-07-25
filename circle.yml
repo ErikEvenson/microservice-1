@@ -1,0 +1,17 @@
+## Customize the test machine
+machine:
+  node:
+    version: 0.12.7
+
+  timezone:
+    UTC # Set the timezone
+
+# dependencies:
+#   post:
+#     - docker info
+#     - docker build -t eevenson/microservice-1 .
+
+# test:
+#   post:
+#     - docker run -d -p 9200:9200 circleci/elasticsearch; sleep 10
+#     - curl --retry 10 --retry-delay 5 -v http://localhost:9200
