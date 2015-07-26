@@ -15,11 +15,9 @@ machine:
 dependencies:
   cache_directories:
     - "~/bin"
-
   pre:
+    - mkdir -p ~/bin
     - ci/dependencies.sh
-
-  override:
     - docker info
     - bin/manage.sh build
 
