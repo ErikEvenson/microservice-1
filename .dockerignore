@@ -1,7 +1,0 @@
-# Do not load into docker context.
-.gitignore
-bin/
-docs/
-gulp/
-node_modules/
-README.md

@@ -1,0 +1,53 @@
+{
+  "builders": [
+    {
+      "type": "docker",
+      "image": "node:0.12.7-slim",
+      "commit": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "mkdir -p /opt/app"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "entrypoint.sh",
+      "destination": "/entrypoint.sh"
+    },
+    {
+      "type": "file",
+      "source": "gulpfile.js",
+      "destination": "/opt/app/gulpfile.js"
+    },
+    {
+      "type": "file",
+      "source": "package.json",
+      "destination": "/opt/app/package.json"
+    },
+    {
+      "type": "file",
+      "source": "gulp",
+      "destination": "/opt/app"
+    },
+    {
+      "type": "file",
+      "source": "src",
+      "destination": "/opt/app"
+    },
+    {
+      "type": "shell",
+      "script": "script.sh"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "docker-tag",
+      "force": true,
+      "repository": "eevenson/microservice-1"
+    }
+  ]
+}

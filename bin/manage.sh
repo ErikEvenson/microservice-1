@@ -24,15 +24,15 @@ shift
 # Switch between various management commands
 case $COMMAND in
   bash)
-    docker exec -it tmp /bin/bash
+    docker exec -it eevenson/microservice-1 /bin/bash
     exit
     ;;
   build)
-    docker build -t eevenson/microservice-1:dev .
+    packer build -force packer.json
     exit
     ;;
   delete_all)
-    bin/manage.sh stop && bin/manage.sh delete_all_containers && bin/manage.sh delete_all_images
+    bin/manage.sh delete_all_containers && bin/manage.sh delete_all_images
     exit
     ;;
   delete_all_containers)
@@ -44,18 +44,28 @@ case $COMMAND in
     exit
     ;;
   dev)
-    nodemon -e js,sh -x "bin/manage.sh run" app.js
+    docker kill tmp
+    docker rm tmp
+    bin/manage.sh build
+    docker run -d -p 80:80 --name="tmp" -v /vagrant/microservice-1:/opt/app eevenson/microservice-1 /entrypoint.sh web
+    # nodemon -e js,sh -x "bin/manage.sh run" app.js
     exit
     ;;
   run)
     docker kill tmp
     docker rm tmp
-    docker build -t tmp .
-    docker run -d -p 80:80 --name="tmp" tmp
+    # bin/manage.sh build
+    docker run -d -p 80:80 --name="tmp" eevenson/microservice-1 /entrypoint.sh web
     exit
     ;;
   stop)
     docker stop tmp
+    exit
+    ;;
+  test)
+    docker kill tmp
+    docker rm tmp
+    docker run -it --name "tmp" eevenson/microservice-1 /entrypoint.sh test
     exit
     ;;
   * | $_NULL)

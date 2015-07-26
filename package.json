@@ -4,7 +4,7 @@
   "description": "microservice-1",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node src/app.js",
     "test": "gulp test"
   },
   "author": "Erik E. Evenson",

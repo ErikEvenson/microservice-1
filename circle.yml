@@ -5,7 +5,7 @@ machine:
 
   services:
     - docker
-    
+
   timezone:
     UTC # Set the timezone
 

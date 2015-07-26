@@ -27,7 +27,7 @@ gulp.task('test', shell.task([
 gulp.task('test:unit', function() {
   process.env.NODE_ENV = 'test';
 
-  return gulp.src(['*.spec.js', './**/*.spec.js'], {read: false})
+  return gulp.src(['src/**/*.spec.js'], {read: false})
     // gulp-mocha needs filepaths so you can't have any plugins before it
     .pipe(mocha({reporter: 'nyan'}));
 });
