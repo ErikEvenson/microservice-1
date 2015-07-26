@@ -10,6 +10,12 @@ machine:
     UTC # Set the timezone
 
 dependencies:
+  cache_directories:
+    - "~/bin"
+    
+  pre:
+    - ci/dependencies.sh
+
   override:
     - docker info
     - bin/manage.sh build
