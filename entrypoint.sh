@@ -11,4 +11,9 @@ if [ "$1" = 'test' ]; then
   npm test
 fi
 
+if [ "$1" = 'dev' ]; then
+  cd /opt/app
+  nodemon -e js,sh -x "npm install && npm start"
+fi
+
 exec "$@"

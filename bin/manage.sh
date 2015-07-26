@@ -24,7 +24,7 @@ shift
 # Switch between various management commands
 case $COMMAND in
   bash)
-    docker exec -it eevenson/microservice-1 /bin/bash
+    docker exec -it tmp /bin/bash
     exit
     ;;
   build)
@@ -46,16 +46,21 @@ case $COMMAND in
   dev)
     docker kill tmp
     docker rm tmp
-    bin/manage.sh build
-    docker run -d -p 80:80 --name="tmp" -v /vagrant/microservice-1:/opt/app eevenson/microservice-1 /entrypoint.sh web
-    # nodemon -e js,sh -x "bin/manage.sh run" app.js
+    docker run -d -p 80:80 --name="tmp" -v /vagrant/microservice-1:/opt/app eevenson/microservice-1 /entrypoint.sh dev
+    exit
+    ;;
+  logs)
+    docker logs tmp
     exit
     ;;
   run)
     docker kill tmp
     docker rm tmp
-    # bin/manage.sh build
     docker run -d -p 80:80 --name="tmp" eevenson/microservice-1 /entrypoint.sh web
+    exit
+    ;;
+  start)
+    docker start tmp
     exit
     ;;
   stop)
