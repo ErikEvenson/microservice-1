@@ -3,6 +3,9 @@ machine:
   node:
     version: 0.12.7
 
+  environment:
+    PATH: "${HOME}/bin:${PATH}"
+
   services:
     - docker
 
@@ -12,7 +15,7 @@ machine:
 dependencies:
   cache_directories:
     - "~/bin"
-    
+
   pre:
     - ci/dependencies.sh
 
