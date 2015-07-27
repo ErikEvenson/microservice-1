@@ -3,27 +3,5 @@ machine:
   node:
     version: 0.12.7
 
-  environment:
-    PATH: "${HOME}/bin:${PATH}"
-
-  services:
-    - docker
-
   timezone:
     UTC # Set the timezone
-
-dependencies:
-  cache_directories:
-    - "~/bin"
-
-  override:
-    - mkdir -p ~/bin
-    - ci/dependencies.sh
-    - docker info
-    - bin/manage.sh build
-
-test:
-  override:
-    - docker run -it --name "tmp" eevenson/microservice-1 /entrypoint.sh test
-    - docker run -d -p 8080:80 eevenson/microservice-1; sleep 10
-    - curl --retry 10 --retry-delay 5 -v http://localhost:8080

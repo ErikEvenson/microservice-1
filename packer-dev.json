@@ -1,0 +1,25 @@
+{
+  "builders": [
+    {
+      "type": "docker",
+      "image": "node:0.12.7-slim",
+      "commit": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "npm install -g nodemon@1.3.8",
+        "mkdir -p /opt/app"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "docker-tag",
+      "force": true,
+      "repository": "img-dev"
+    }
+  ]
+}

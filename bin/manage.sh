@@ -23,54 +23,15 @@ shift
 # Set script parameters
 # Switch between various management commands
 case $COMMAND in
-  bash)
-    docker exec -it tmp /bin/bash
+  build-dev)
+    packer build -force packer-dev.json
     exit
     ;;
-  build)
-    packer build -force packer.json
-    exit
-    ;;
-  delete_all)
-    bin/manage.sh delete_all_containers && bin/manage.sh delete_all_images
-    exit
-    ;;
-  delete_all_containers)
-    docker rm `docker ps --no-trunc -aq`
-    exit
-    ;;
-  delete_all_images)
-    docker rmi $(docker images -q)
-    exit
-    ;;
-  dev)
-    docker kill tmp
-    docker rm tmp
-    docker run -d -p 80:80 --name="tmp" -v /vagrant/microservice-1:/opt/app eevenson/microservice-1 /entrypoint.sh dev
-    exit
-    ;;
-  logs)
-    docker logs tmp
-    exit
-    ;;
-  run)
-    docker kill tmp
-    docker rm tmp
-    docker run -d -p 80:80 --name="tmp" eevenson/microservice-1 /entrypoint.sh web
-    exit
-    ;;
-  start)
-    docker start tmp
-    exit
-    ;;
-  stop)
-    docker stop tmp
-    exit
-    ;;
-  test)
-    docker kill tmp
-    docker rm tmp
-    docker run -it --name "tmp" eevenson/microservice-1 /entrypoint.sh test
+  run-dev)
+    echo $DIR
+    docker kill cont-dev
+    docker rm cont-dev
+    docker run -it -p 80:80 --name="cont-dev" -v /vagrant/microservice-1:/opt/app img-dev /bin/bash
     exit
     ;;
   * | $_NULL)
@@ -78,3 +39,60 @@ case $COMMAND in
     exit 1
     ;;
 esac
+
+# case $COMMAND in
+#   bash)
+#     docker exec -it tmp /bin/bash
+#     exit
+#     ;;
+#   build)
+#     packer build -force packer.json
+#     exit
+#     ;;
+#   delete_all)
+#     bin/manage.sh delete_all_containers && bin/manage.sh delete_all_images
+#     exit
+#     ;;
+#   delete_all_containers)
+#     docker rm `docker ps --no-trunc -aq`
+#     exit
+#     ;;
+#   delete_all_images)
+#     docker rmi $(docker images -q)
+#     exit
+#     ;;
+#   dev)
+#     docker kill tmp
+#     docker rm tmp
+#     docker run -d -p 80:80 --name="tmp" -v /vagrant/microservice-1:/opt/app eevenson/microservice-1 /entrypoint.sh dev
+#     exit
+#     ;;
+#   logs)
+#     docker logs tmp
+#     exit
+#     ;;
+#   run)
+#     docker kill tmp
+#     docker rm tmp
+#     docker run -d -p 80:80 --name="tmp" eevenson/microservice-1 /entrypoint.sh web
+#     exit
+#     ;;
+#   start)
+#     docker start tmp
+#     exit
+#     ;;
+#   stop)
+#     docker stop tmp
+#     exit
+#     ;;
+#   test)
+#     docker kill tmp
+#     docker rm tmp
+#     docker run -it --name "tmp" eevenson/microservice-1 /entrypoint.sh test
+#     exit
+#     ;;
+#   * | $_NULL)
+#     echo -e "$USAGE"
+#     exit 1
+#     ;;
+# esac

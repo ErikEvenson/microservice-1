@@ -2,10 +2,10 @@
   "name": "microservice-1",
   "version": "0.0.1",
   "description": "microservice-1",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js",
-    "test": "gulp test"
+    "start": "npm install && node src/app.js",
+    "test": "npm install && gulp test"
   },
   "author": "Erik E. Evenson",
   "license": "ISC",
